@@ -1,28 +1,41 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="body">
+    <header class="header">Studio Ghibli API</header>
+    <div class="main-container"></div>
+      <people-list :people="people"></people-list>
+      <person-detail :person="selectedPerson" v-if="selectedPerson"></person-detail>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import PeopleList from './components/PeopleList.vue'
+import PersonDetail from './components/PersonDetail.vue'
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+  name: 'app',
+  data() {
+    return {
+      ghiblis: [],
+      selectedGhibli: null,
+    };
+  },
+  mounted() {
+    fetch('https://ghibliapi.herokuapp.com/people/')
+    .then(res => res.json())
+    .then(people => this.people = people)
+
+  
+    },
+    components: {
+      "people-list": PeopleList,
+      "person-detail": PersonDetail
+    }
 }
+
+
+
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
