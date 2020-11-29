@@ -1,8 +1,8 @@
 <template>
   <div id=list>
       <ul>
-          <!-- build thre list from each person in people -->
-        <list-item v-for="(person) in people" :person="person" :key="person.id"></list-item>
+          <!-- build the list from each person in people -->
+        <list-item v-for="(person, index) in people" :person="person" :key="index"></list-item>
       </ul>
   </div>
 </template>

@@ -47,7 +47,7 @@ export default {
       .then(data => this.people = data)
       
       eventBus.$on('person-selected', (person) => {
-        // what it does with wehat it gets: person becomes selectedPerson
+        // what it does with what it gets: person becomes selectedPerson
         this.selectedPerson = person;
       })
       
