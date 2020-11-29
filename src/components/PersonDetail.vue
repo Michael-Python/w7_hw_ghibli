@@ -7,7 +7,6 @@
       <div id="left-display">
         <h3>{{selectedPerson.name}}</h3>
         <p>{{selectedPerson.gender}}</p>
-        <p>species to go here</p>
       </div>
       
       <!-- this looks in the static/images folder, within the components folder to pull an image with the same name as the selected person-->
@@ -54,20 +53,20 @@ export default {
       this.getFilms;
     }
   },
-  methods: {
-    getFilms() {
-      // the map function gets an array of films for each person, these are 'promised' to happen
-      const filmsPromises = this.people.films.map((films) => {
-        // this takes the fetch information and converts it to json format
-        return fetch(films).then(res => res.json());
-      })
-      // the promise.all function ensures all individual promises are resolved
-      Promise.all(filmsPromises)
-      .then((data) => {
-        this.films = data; 
-      })
-    }
-  }
+//   methods: {
+//     getFilms() {
+//       // the map function gets an array of films for each person, these are 'promised' to happen
+//       const filmsPromises = this.people.films.map((films) => {
+//         // this takes the fetch information and converts it to json format
+//         return fetch(films).then(res => res.json());
+//       })
+//       // the promise.all function ensures all individual promises are resolved
+//       Promise.all(filmsPromises)
+//       .then((data) => {
+//         this.films = data; 
+//       })
+    // }
+  // }
   
 }
 </script>
