@@ -10,12 +10,13 @@ import { eventBus } from '../main.js'
 
 export default {
     name: 'list-item',
+    // this comes from PersonDetail
     props: ['person'],
     methods: {
         handleClick(){
             // lets me see the output in the console
             // console.log('person', this.person);
-            // emit the information back, channel to broadcast on and what you are broadcasting
+            // emit the information back to app.vue, 'channel to broadcast on' and 'what you are broadcasting'
             eventBus.$emit('person-selected', this.person)
         } 
     }

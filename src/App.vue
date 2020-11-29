@@ -3,14 +3,15 @@
     <h1>Studio Ghibli</h1>    
     
     <!-- sets up a select box to pull items from the people array -->
-    <!-- <label for="person_select">Click to select a person from The Studio Ghibli Universe: </label>
+    <label for="person_select">Click to select a person from The Studio Ghibli Universe: </label>
     <select id="person_select" v-model="selectedPerson">
       <option disabled value=""></option>
       <option v-for="(person, index) in people" :key="index" :value="person">{{person.name}}</option>
 
-    </select> -->
+    </select>
     <div class="main-container">
-      <people-list :people="people"></people-list>    
+      <!-- the list doesn't need to be displayed now that I have a dropdown -->
+      <!-- <people-list :people="people"></people-list>     -->
       <!-- this defines selectedPerson as the selected person from the select part of the web page -->
       <person-detail :selectedPerson="selectedPerson" v-if="selectedPerson"></person-detail>
     </div>
@@ -29,6 +30,7 @@ export default {
   data(){
     return{
       people: [],
+      // not null when person is clicked
       selectedPerson: null
     };
   },
@@ -45,16 +47,11 @@ export default {
       .then(data => this.people = data)
       
       eventBus.$on('person-selected', (person) => {
-        // what it does with wehat it gets
+        // what it does with wehat it gets: person becomes selectedPerson
         this.selectedPerson = person;
       })
       
-// this.handleClick();
-    // this.addImage();
 
-    // eventBus.$on("person-selected", (person) => {
-    //   this.selectedPerson = person;
-    // })
   },
   methods:{
     
@@ -66,10 +63,7 @@ export default {
 </script>
 
 <style>
-body{
-  display: flex;
-  flex-wrap: wrap;
-  
-}
+
+
 
 </style>
