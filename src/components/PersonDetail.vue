@@ -1,21 +1,27 @@
 <template lang="html">
   <div id="selected_person">
-      <!-- information that is important for display on the person level -->
-      <div id="display"></div>
-        <div id="left-display">
-          <h3>{{selectedPerson.name}}</h3>
-          <p>{{selectedPerson.gender}}</p>
-          <p>species to go here</p>
-          
-        </div>
-        <!-- this looks in the static/images folder, within the components folder to pull an image with the same name as the selected person-->
-        <div id="right-display">
-          <img :src="require(`./static/images/${selectedPerson.name}.jpg`)" width = 50% alt class="icon" />
-        </div>
-        <div id="film">
-          <p><film-list v-if="films.length" :films="films"></film-list></p>
-        </div>
+
+    <!-- information that is important for display on the person level -->
+    <div id="display"></div>
+
+      <div id="left-display">
+        <h3>{{selectedPerson.name}}</h3>
+        <p>{{selectedPerson.gender}}</p>
+        <p>species to go here</p>
       </div>
+      
+      <!-- this looks in the static/images folder, within the components folder to pull an image with the same name as the selected person-->
+      <div id="right-display">
+        <img :src="require(`./static/images/${selectedPerson.name}.jpg`)" alt class="profile" />
+      </div>
+
+      <div id="films">
+        <!-- the main problem is here, I think: I should not be referring to selectedPerson for the value for the films array; however, deleting 'selectedPerson.' before 'films' takes away any input from film list-->
+        <p><film-list v-if="films.length" :films="films"></film-list></p>
+      </div>
+
+    </div>
+
   </div>
 </template>
 
@@ -33,11 +39,15 @@ export default {
       films: []
     }
   },
-  componenents: {
+  components: {
     'film-list': FilmList
   },
   mounted() {
-    this.getFilms();
+    fetch('https://ghibliapi.herokuapp.com/films')
+      .then(response => response.json())
+      // .then(data => console.log(data))
+      // this makes the data from the of people line above = to the array 
+      .then(data => this.films = data)
   },
   watch: {
     selectedPerson: function() {
@@ -47,9 +57,9 @@ export default {
   methods: {
     getFilms() {
       // the map function gets an array of films for each person, these are 'promised' to happen
-      const filmsPromises = this.person.films.map((film) => {
+      const filmsPromises = this.people.films.map((films) => {
         // this takes the fetch information and converts it to json format
-        return fetch(films).then(resource => resource.json());
+        return fetch(films).then(res => res.json());
       })
       // the promise.all function ensures all individual promises are resolved
       Promise.all(filmsPromises)
