@@ -23,7 +23,6 @@
 import PersonDetail from './components/PersonDetail.vue'
 import PeopleList from './components/PeopleList'
 import { eventBus } from './main.js'
-// import { eventBus } from './main.js'
 
 export default {
   name: 'app',
@@ -67,5 +66,10 @@ export default {
 </script>
 
 <style>
+body{
+  display: flex;
+  flex-wrap: wrap;
+  
+}
 
 </style>
