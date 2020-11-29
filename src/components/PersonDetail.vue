@@ -13,7 +13,7 @@
           <img :src="require(`./static/images/${selectedPerson.name}.jpg`)" width = 50% alt class="icon" />
         </div>
         <div id="film">
-          <p><film-list v-if="selectedPerson.films.length" :films="films"></film-list></p>
+          <p><film-list v-if="films.length" :films="films"></film-list></p>
         </div>
       </div>
   </div>
@@ -47,7 +47,7 @@ export default {
   methods: {
     getFilms() {
       // the map function gets an array of films for each person, these are 'promised' to happen
-      const filmsPromises = this.person.films.map((films) => {
+      const filmsPromises = this.person.films.map((film) => {
         // this takes the fetch information and converts it to json format
         return fetch(films).then(resource => resource.json());
       })
